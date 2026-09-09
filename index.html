@@ -7,15 +7,50 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Шапка з назвою застосунку -->
+    <header>
+        <h1>Трекер настрою</h1>
+        <nav>
+            <a href="#mood-tracker">Відмітити настрій</a>
+            <a href="#history">Історія записів</a>
+        </nav>
+    </header>
 
-    <!-- Форма відмітки поточного настрою -->
+    <main>
+        <section id="mood-tracker">
+            <h2>Відмітити настрій</h2>
 
-    <!-- Блок історії записів за датами -->
+            <form>
+                <label for="mood">Напишіть який у вас настрій:</label>
+                <input type="text" id="mood" name="mood">
 
-    <!-- Блок простої статистики -->
+                <button type="submit">Зберегти</button>
+            </form>
+        </section>
 
-    <!-- Підвал -->
+        <section id="history">
+            <h2>Історія записів</h2>
+            <article>
+                <h3>Дата: 2026-08-09</h3>
+                <p>Настрій: Задовільний</p>
+            </article>
+
+            <article>
+                <h3>Дата: 2026-09-09</h3>
+                <p>Настрій: Щасливий</p>
+            </article>
+        </section>
+    </main>
+
+    <aside>
+        <h2>Короткий підсумок</h2>
+        <p>
+            Ваш настрій протягом останніх днів переважно позитивний.
+        </p>
+    </aside>
+
+    <footer>
+        <p>Трекер настрою - Вебзастосунок для відстеження настрою та емоцій користувача. &copy; 2026</p>
+    </footer>
 
     <script src="js/app.js"></script>
 </body>
