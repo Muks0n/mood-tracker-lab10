@@ -1,0 +1,198 @@
+*, *::before, *::after 
+{
+    box-sizing: border-box;
+}
+
+body 
+{
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #3f3a45;
+    background-color: #ffdfca;   
+}
+
+header 
+{
+    background-color: #ffdce4;
+    padding: 24px;
+    text-align: center;
+    border-bottom: 5px solid #ffcfda;
+}
+
+header h1 
+{
+    margin: 0 0 16px;
+
+    font-size: 2.5rem;
+    color: #40344a;
+}
+
+nav a 
+{
+    display: inline-block;
+
+    margin-right: 16px;
+    padding: 8px 14px;
+
+    color: #40344a;
+
+}
+
+nav a:hover 
+{
+    background-color: #fdbecd;
+}
+
+main 
+{
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 32px 20px;
+}
+
+section 
+{
+    margin-bottom: 32px;
+}
+
+section h2 
+{
+    margin-bottom: 20px;
+
+    color: #40344a;
+}
+
+form 
+{
+    max-width: 1200px;
+    padding: 24px;
+
+    background-color: #fcd3b8;
+
+    border: 2px solid #e4b79a;
+    border-radius: 12px;
+}
+
+form label 
+{
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+form input 
+{
+    display: block;
+
+    width: 100%;
+
+    padding: 4px;
+
+    margin-bottom: 16px;
+
+    font-size: 1rem;
+
+    border: 1px solid #b8d8ca;
+    border-radius: 8px;
+
+    background-color: #fff2eb;
+}
+
+form button 
+{
+    padding: 8px;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: #3f3a45;
+    background-color: #f0c09e;
+
+    border-radius: 8px;
+    border: 3px solid #e4b79a;
+
+    cursor: pointer;
+}
+
+form button:hover 
+{
+    background-color: #efaf85;
+}
+
+.mood-card 
+{
+    max-width: 1200px;
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    background-color: #f6c7b6;
+
+    border-radius: 16px;
+
+    border: 2px solid #e7aa96;
+}
+
+.mood-card h3 
+{
+    margin: 0 0 8px;
+
+    color: #40344a;
+}
+
+.mood-card p 
+{
+    color: #4c3f45;
+}
+
+aside 
+{
+    max-width: 1200px;
+
+    margin: 32px;
+    margin-top: 0;
+
+    padding: 14px;
+
+    text-align: center;
+
+    background-color: #dcd1ec;
+
+    border: 3px solid #b9a6d0;
+    border-radius: 12px;
+}
+
+aside h2 
+{
+    margin-top: 16px;
+    color: #594866;
+}
+
+
+aside p 
+{
+    margin-bottom: 16px;
+}
+
+footer 
+{
+    padding: 16px;
+
+    font-size: 0.8rem;
+
+    color: #706a75;
+
+    border-top: 3px solid #fcd3b8;
+}
+
+
+footer p 
+{
+    margin: 0;
+}
