@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
+    <header class="site-header">
         <h1>Трекер настрою</h1>
         <nav>
             <a href="#mood-tracker">Відмітити настрій</a>
@@ -15,38 +15,44 @@
         </nav>
     </header>
 
-    <main>
-        <section id="mood-tracker">
-            <h2>Відмітити настрій</h2>
+    <div class="page-layout">
+        <main>
+            <section id="mood-tracker">
+                <h2>Відмітити настрій</h2>
 
-            <form>
-                <label for="mood">Напишіть який у вас настрій:</label>
-                <input type="text" id="mood" name="mood">
+                <form>
+                    <label for="mood">Напишіть який у вас настрій:</label>
+                    <input type="text" id="mood" name="mood">
 
-                <button type="submit">Зберегти</button>
-            </form>
-        </section>
+                    <button type="submit">Зберегти</button>
+                </form>
+            </section>
 
-        <section id="history">
-            <h2>Історія записів</h2>
-            <article class="mood-card">
-                <h3>Дата: 2026-08-09</h3>
-                <p>Настрій: Задовільний</p>
-            </article>
+            <section id="history">
+                <h2>Історія записів</h2>
 
-            <article class="mood-card">
-                <h3>Дата: 2026-09-09</h3>
-                <p>Настрій: Щасливий</p>
-            </article>
-        </section>
-    </main>
+                <div class ="cards">
+                    <article class="mood-card">
+                        <h3>Дата: 2026-08-09</h3>
+                        <p>Настрій: Задовільний</p>
+                    </article>
 
-    <aside>
-        <h2>Короткий підсумок</h2>
-        <p>
-            Ваш настрій протягом останніх днів переважно позитивний
-        </p>
-    </aside>
+                    <article class="mood-card">
+                        <h3>Дата: 2026-09-09</h3>
+                        <p>Настрій: Щасливий</p>
+                    </article>
+                </div>
+
+            </section>
+        </main>
+
+        <aside>
+            <h2>Короткий підсумок</h2>
+            <p>
+                Ваш настрій протягом останніх днів переважно позитивний
+            </p>
+        </aside>
+    </div>
 
     <footer>
         <p>Трекер настрою - Вебзастосунок для відстеження настрою та емоцій користувача. &copy; 2026</p>

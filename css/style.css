@@ -13,15 +13,21 @@ body
     background-color: #ffdfca;   
 }
 
-header 
+.site-header 
 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+
     background-color: #ffdce4;
     padding: 24px;
     text-align: center;
     border-bottom: 5px solid #ffcfda;
 }
 
-header h1 
+.site-header h1 
 {
     margin: 0 0 16px;
 
@@ -29,7 +35,15 @@ header h1
     color: #40344a;
 }
 
-nav a 
+.site-header nav 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-header nav a 
 {
     display: inline-block;
 
@@ -40,18 +54,25 @@ nav a
 
 }
 
-nav a:hover 
+.site-header nav a:hover 
 {
     background-color: #fdbecd;
 }
 
+.page-layout 
+{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
 main 
 {
-    max-width: 1500px;
-
-    margin: 0 auto;
-
-    padding: 32px 20px;
+    min-width: 0;
 }
 
 section 
@@ -61,6 +82,8 @@ section
 
 section h2 
 {
+    margin-top: 0;
+
     margin-bottom: 20px;
 
     color: #40344a;
@@ -125,6 +148,15 @@ form button:hover
     background-color: #efaf85;
 }
 
+.cards 
+{
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+}
+
 .mood-card 
 {
     max-width: 1200px;
@@ -148,16 +180,12 @@ form button:hover
 
 .mood-card p 
 {
+    margin: 0;
     color: #4c3f45;
 }
 
 aside 
 {
-    max-width: 1200px;
-
-    margin: 32px;
-    margin-top: 0;
-
     padding: 14px;
 
     text-align: center;
@@ -170,7 +198,7 @@ aside
 
 aside h2 
 {
-    margin-top: 16px;
+    margin-top: 0;
     color: #594866;
 }
 
@@ -195,4 +223,53 @@ footer
 footer p 
 {
     margin: 0;
+}
+
+@media (min-width: 600px) 
+{
+
+    .site-header 
+    {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        text-align: left;
+    }
+
+    .site-header nav 
+    {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .cards 
+    {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (min-width: 1024px) 
+{
+
+    .page-layout 
+    {
+        grid-template-columns: 3fr 1fr;
+        gap: 24px;
+    }
+
+    .cards 
+    {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    aside 
+    {
+        margin-top: 60px;
+        align-self: start;
+    }
+
 }
