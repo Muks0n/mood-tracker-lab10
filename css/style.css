@@ -6,11 +6,13 @@
 body 
 {
     margin: 0;
-    font-family: system-ui, sans-serif;
+
+    font-family: Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
+
     color: #3f3a45;
-    background-color: #ffdfca;   
+    background-color: #ffefde;
 }
 
 .site-header 
@@ -21,10 +23,13 @@ body
     align-items: center;
     gap: 16px;
 
-    background-color: #ffdce4;
+    background-color: #ffe6d2;
+
     padding: 24px;
+
     text-align: center;
-    border-bottom: 5px solid #ffcfda;
+
+    border-bottom: 3px solid #c9beb7;
 }
 
 .site-header h1 
@@ -32,14 +37,18 @@ body
     margin: 0 0 16px;
 
     font-size: 2.5rem;
-    color: #40344a;
+
+    color: #403b43;
 }
 
 .site-header nav 
 {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     gap: 8px;
 }
 
@@ -47,27 +56,33 @@ body
 {
     display: inline-block;
 
-    margin-right: 16px;
     padding: 8px 14px;
 
-    color: #40344a;
+    color: #403b43;
 
+    text-decoration: none;
+
+    border-radius: 8px;
 }
 
 .site-header nav a:hover 
 {
-    background-color: #fdbecd;
+    background-color: #d8cec8;
 }
 
 .page-layout 
 {
     display: grid;
+
     grid-template-columns: 1fr;
-    gap: 24px;
+
+    gap: 32px;
 
     max-width: 1500px;
+
     margin: 0 auto;
-    padding: 24px 16px;
+
+    padding: 32px 20px;
 }
 
 main 
@@ -77,7 +92,7 @@ main
 
 section 
 {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
 }
 
 section h2 
@@ -86,18 +101,22 @@ section h2
 
     margin-bottom: 20px;
 
-    color: #40344a;
+    font-size: 1.75rem;
+
+    color: #403b43;
 }
 
 form 
 {
     max-width: 1200px;
+
     padding: 24px;
 
-    background-color: #fcd3b8;
+    background-color: #ffe6d2;
 
-    border: 2px solid #e4b79a;
-    border-radius: 12px;
+    border: 2px solid #c9beb7;
+
+    border-radius: 16px;
 }
 
 form label 
@@ -115,38 +134,55 @@ form input
 
     width: 100%;
 
-    padding: 4px;
+    padding: 10px;
 
     margin-bottom: 16px;
 
     font-size: 1rem;
 
-    border: 1px solid #b8d8ca;
-    border-radius: 8px;
+    color: #3f3a45;
 
-    background-color: #fff2eb;
+    background-color: #ffffff;
+
+    border: 2px solid #aaa09a;
+
+    border-radius: 8px;
 }
 
 form button 
 {
-    padding: 8px;
+    min-height: 44px;
+
+    padding: 8px 18px;
 
     font-size: 1rem;
     font-weight: bold;
 
-    color: #3f3a45;
-    background-color: #f0c09e;
+    color: #ffffff;
+
+    background-color: #66577a;
+
+    border: 2px solid #66577a;
 
     border-radius: 8px;
-    border: 3px solid #e4b79a;
 
     cursor: pointer;
 }
 
 form button:hover 
 {
-    background-color: #efaf85;
+    background-color: #514462;
 }
+
+/*
+   Нечітку вимогу «кольори мають відчуватися
+   заспокійливими, а не тривожними» інтерпретовано
+   як використання приглушених, ненасичених відтінків.
+   Такі кольори не є надто яскравими та створюють
+   спокійне візуальне сприйняття сторінки.
+   Кожен рівень настрою має власний колір,
+   а його назва вказана текстом.
+*/
 
 .cards 
 {
@@ -154,54 +190,87 @@ form button:hover
 
     grid-template-columns: 1fr;
 
-    gap: 16px;
+    gap: 20px;
 }
 
 .mood-card 
 {
     max-width: 1200px;
-    padding: 14px;
 
-    margin-bottom: 12px;
-
-    background-color: #f6c7b6;
+    padding: 20px;
 
     border-radius: 16px;
 
-    border: 2px solid #e7aa96;
+    border: 3px solid;
+
+    border-left: 10px solid;
+}
+
+.mood-card-1 
+{
+    background-color: #daaaaa;
+    border-color: #4c3c3c;
+}
+
+.mood-card-2 
+{
+    background-color: #aac9de;
+    border-color: #445159;
+}
+
+.mood-card-3 
+{
+    background-color: #c3a9e4;
+    border-color: #4c4259;
+}
+
+.mood-card-4 
+{
+    background-color: #e4d2a3;
+    border-color: #595240;
+}
+
+.mood-card-5 
+{
+    background-color: #bce4b3;
+    border-color: #4a5946;
 }
 
 .mood-card h3 
 {
     margin: 0 0 8px;
 
-    color: #40344a;
+    font-size: 1.25rem;
+
+    color: #403b43;
 }
 
 .mood-card p 
 {
     margin: 0;
-    color: #4c3f45;
+
+    color: #3f3a45;
 }
 
 aside 
 {
-    padding: 14px;
+    padding: 20px;
 
     text-align: center;
 
-    background-color: #dcd1ec;
+    background-color: #ffe6d2;
 
-    border: 3px solid #b9a6d0;
-    border-radius: 12px;
+    border: 2px solid #aaa09a;
+
+    border-radius: 16px;
 }
 
 aside h2 
 {
     margin-top: 0;
-    color: #594866;
-}
 
+    color: #403b43;
+}
 
 aside p 
 {
@@ -210,33 +279,37 @@ aside p
 
 footer 
 {
-    padding: 16px;
+    padding: 20px;
 
-    font-size: 0.8rem;
+    font-size: 0.875rem;
 
-    color: #706a75;
+    color: #5e585d;
 
-    border-top: 3px solid #fcd3b8;
+    border-top: 2px solid #c9beb7;
+
+    text-align: center;
 }
-
 
 footer p 
 {
     margin: 0;
 }
 
-img {
+img 
+{
     max-width: 100%;
+
     height: auto;
 }
 
 @media (min-width: 600px) 
 {
-
     .site-header 
     {
         flex-direction: row;
+
         justify-content: space-between;
+
         align-items: center;
 
         text-align: left;
@@ -245,8 +318,11 @@ img {
     .site-header nav 
     {
         flex-direction: row;
+
         flex-wrap: wrap;
+
         justify-content: center;
+
         gap: 8px;
     }
 
@@ -254,16 +330,15 @@ img {
     {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
 @media (min-width: 1024px) 
 {
-
     .page-layout 
     {
         grid-template-columns: 3fr 1fr;
-        gap: 24px;
+
+        gap: 32px;
     }
 
     .cards 
@@ -274,7 +349,7 @@ img {
     aside 
     {
         margin-top: 60px;
+
         align-self: start;
     }
-
 }
