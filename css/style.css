@@ -1,9 +1,10 @@
-*, *::before, *::after 
+
+*, *::before, *::after
 {
     box-sizing: border-box;
 }
 
-body 
+body
 {
     margin: 0;
 
@@ -15,7 +16,7 @@ body
     background-color: #ffefde;
 }
 
-.site-header 
+.site-header
 {
     display: flex;
     flex-direction: column;
@@ -32,7 +33,7 @@ body
     border-bottom: 3px solid #c9beb7;
 }
 
-.site-header h1 
+.site-header h1
 {
     margin: 0 0 16px;
 
@@ -41,18 +42,16 @@ body
     color: #403b43;
 }
 
-.site-header nav 
+.site-header nav
 {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     gap: 8px;
 }
 
-.site-header nav a 
+.site-header nav a
 {
     display: inline-block;
 
@@ -65,15 +64,14 @@ body
     border-radius: 8px;
 }
 
-.site-header nav a:hover 
+.site-header nav a:hover
 {
     background-color: #d8cec8;
 }
 
-.page-layout 
+.page-layout
 {
     display: grid;
-
     grid-template-columns: 1fr;
 
     gap: 32px;
@@ -85,20 +83,19 @@ body
     padding: 32px 20px;
 }
 
-main 
+main
 {
     min-width: 0;
 }
 
-section 
+section
 {
     margin-bottom: 40px;
 }
 
-section h2 
+section h2
 {
     margin-top: 0;
-
     margin-bottom: 20px;
 
     font-size: 1.75rem;
@@ -106,7 +103,7 @@ section h2
     color: #403b43;
 }
 
-form 
+form
 {
     max-width: 1200px;
 
@@ -119,7 +116,7 @@ form
     border-radius: 16px;
 }
 
-form label 
+form label
 {
     display: block;
 
@@ -128,7 +125,7 @@ form label
     font-weight: bold;
 }
 
-form input 
+form input
 {
     display: block;
 
@@ -149,7 +146,7 @@ form input
     border-radius: 8px;
 }
 
-form button 
+form button
 {
     min-height: 44px;
 
@@ -169,13 +166,13 @@ form button
     cursor: pointer;
 }
 
-form button:hover 
+form button:hover
 {
     background-color: #514462;
 }
 
 /*
-   Нечітку вимогу - «кольори мають відчуватися
+   Нечітку вимогу «кольори мають відчуватися
    заспокійливими, а не тривожними» інтерпретовано
    як використання приглушених, ненасичених відтінків.
    Такі кольори не є надто яскравими та створюють
@@ -184,16 +181,15 @@ form button:hover
    а його назва вказана текстом.
 */
 
-.cards 
+.cards
 {
     display: grid;
-
     grid-template-columns: 1fr;
 
     gap: 20px;
 }
 
-.mood-card 
+.mood-card
 {
     max-width: 1200px;
 
@@ -202,41 +198,57 @@ form button:hover
     border-radius: 16px;
 
     border: 3px solid;
-
-    border-left: 10px solid;
+    border-left-width: 10px;
 }
 
-.mood-card-1 
+/* Кольори для п'яти рівнів настрою */
+
+.mood-card-1
 {
     background-color: #daaaaa;
     border-color: #4c3c3c;
 }
 
-.mood-card-2 
+.mood-card-2
 {
     background-color: #aac9de;
     border-color: #445159;
 }
 
-.mood-card-3 
+.mood-card-3
 {
     background-color: #c3a9e4;
     border-color: #4c4259;
 }
 
-.mood-card-4 
+.mood-card-4
 {
     background-color: #e4d2a3;
     border-color: #595240;
 }
 
-.mood-card-5 
+.mood-card-5
 {
     background-color: #bce4b3;
     border-color: #4a5946;
 }
 
-.mood-card h3 
+/*
+   Лабораторна робота №7.
+   Умовне оформлення карток залежно від настрою.
+*/
+
+.mood-card.good
+{
+    border-style: solid;
+}
+
+.mood-card.hard
+{
+    border-style: dashed;
+}
+
+.mood-card h3
 {
     margin: 0 0 8px;
 
@@ -245,14 +257,14 @@ form button:hover
     color: #403b43;
 }
 
-.mood-card p 
+.mood-card p
 {
     margin: 0;
 
     color: #3f3a45;
 }
 
-aside 
+aside
 {
     padding: 20px;
 
@@ -265,19 +277,19 @@ aside
     border-radius: 16px;
 }
 
-aside h2 
+aside h2
 {
     margin-top: 0;
 
     color: #403b43;
 }
 
-aside p 
+aside p
 {
     margin-bottom: 16px;
 }
 
-footer 
+footer
 {
     padding: 20px;
 
@@ -290,35 +302,34 @@ footer
     text-align: center;
 }
 
-footer p 
+footer p
 {
     margin: 0;
 }
 
-img 
+img
 {
     max-width: 100%;
-
     height: auto;
 }
 
-@media (min-width: 600px) 
+/* Адаптація для планшетів */
+
+@media (min-width: 600px)
 {
-    .site-header 
+    .site-header
     {
         flex-direction: row;
 
         justify-content: space-between;
-
         align-items: center;
 
         text-align: left;
     }
 
-    .site-header nav 
+    .site-header nav
     {
         flex-direction: row;
-
         flex-wrap: wrap;
 
         justify-content: center;
@@ -326,27 +337,29 @@ img
         gap: 8px;
     }
 
-    .cards 
+    .cards
     {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 1024px) 
+/* Адаптація для комп'ютерів */
+
+@media (min-width: 1024px)
 {
-    .page-layout 
+    .page-layout
     {
         grid-template-columns: 3fr 1fr;
 
         gap: 32px;
     }
 
-    .cards 
+    .cards
     {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    aside 
+    aside
     {
         margin-top: 60px;
 
