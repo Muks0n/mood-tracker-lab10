@@ -233,11 +233,6 @@ form button:hover
     border-color: #4a5946;
 }
 
-/*
-   Лабораторна робота №7.
-   Умовне оформлення карток залежно від настрою.
-*/
-
 .mood-card.good
 {
     border-style: solid;
