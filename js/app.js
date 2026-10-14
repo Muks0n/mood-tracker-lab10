@@ -85,10 +85,12 @@ function renderMoodHistory(records) {
             ". " + record.note;
 
         // Додаємо клас відповідно до рівня настрою.
-        if (record.mood >= 4) 
+        const moodLabel = moodToLabel(record.mood);
+
+        if (moodLabel === "Задовільний" || moodLabel === "Щасливий") 
         {
             card.classList.add("good");
-        } 
+        }       
         else 
         {
             card.classList.add("hard");
