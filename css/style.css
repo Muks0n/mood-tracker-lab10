@@ -233,6 +233,8 @@ form button:hover
     border-color: #4a5946;
 }
 
+/* Умовне оформлення карток залежно від настрою */
+
 .mood-card.good
 {
     border-style: solid;
@@ -306,6 +308,28 @@ img
 {
     max-width: 100%;
     height: auto;
+}
+
+/* Практична робота №8: оформлення форми */
+
+#note-counter
+{
+    margin: -8px 0 16px;
+
+    font-size: 0.875rem;
+
+    color: #5e585d;
+}
+
+form input:focus
+{
+    outline: 2px solid #66577a;
+    outline-offset: 2px;
+}
+
+form input:invalid:not(:placeholder-shown)
+{
+    border-color: #a04747;
 }
 
 /* Адаптація для планшетів */
