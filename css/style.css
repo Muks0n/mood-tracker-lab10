@@ -47,7 +47,6 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 8px;
 }
 
@@ -146,7 +145,8 @@ form input
     border-radius: 8px;
 }
 
-form button
+form button,
+#refresh-button
 {
     min-height: 44px;
 
@@ -166,9 +166,16 @@ form button
     cursor: pointer;
 }
 
-form button:hover
+form button:hover,
+#refresh-button:hover:not(:disabled)
 {
     background-color: #514462;
+}
+
+#refresh-button:disabled
+{
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 /*
@@ -201,8 +208,6 @@ form button:hover
     border-left-width: 10px;
 }
 
-/* Кольори для п'яти рівнів настрою */
-
 .mood-card-1
 {
     background-color: #daaaaa;
@@ -233,8 +238,6 @@ form button:hover
     border-color: #4a5946;
 }
 
-/* Умовне оформлення карток залежно від настрою */
-
 .mood-card.good
 {
     border-style: solid;
@@ -259,6 +262,11 @@ form button:hover
     margin: 0;
 
     color: #3f3a45;
+}
+
+.mood-card p + p
+{
+    margin-top: 12px;
 }
 
 aside
@@ -332,6 +340,43 @@ form input:invalid:not(:placeholder-shown)
     border-color: #a04747;
 }
 
+/* Практична робота №9: API */
+
+#refresh-button
+{
+    margin-bottom: 16px;
+}
+
+#loading-message
+{
+    font-weight: bold;
+    color: #514462;
+}
+
+#error-message
+{
+    padding: 12px;
+
+    color: #842e2e;
+    background-color: #f8dada;
+
+    border: 2px solid #a04747;
+    border-radius: 8px;
+}
+
+[hidden]
+{
+    display: none !important;
+}
+
+.api-card
+{
+    background-color: #e9dfd5;
+    border-color: #66577a;
+
+    overflow-wrap: anywhere;
+}
+
 /* Адаптація для планшетів */
 
 @media (min-width: 600px)
@@ -339,7 +384,6 @@ form input:invalid:not(:placeholder-shown)
     .site-header
     {
         flex-direction: row;
-
         justify-content: space-between;
         align-items: center;
 
@@ -350,7 +394,6 @@ form input:invalid:not(:placeholder-shown)
     {
         flex-direction: row;
         flex-wrap: wrap;
-
         justify-content: center;
 
         gap: 8px;
@@ -369,7 +412,6 @@ form input:invalid:not(:placeholder-shown)
     .page-layout
     {
         grid-template-columns: 3fr 1fr;
-
         gap: 32px;
     }
 
@@ -381,7 +423,6 @@ form input:invalid:not(:placeholder-shown)
     aside
     {
         margin-top: 60px;
-
         align-self: start;
     }
 }
