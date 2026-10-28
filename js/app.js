@@ -3,276 +3,242 @@
 // додаткового налаштування збірки.
 
 
-const moodRecords = [
-    { date: "2026-10-05", mood: 5, note: "Хороший день" },
-    { date: "2026-10-06", mood: 3, note: "Звичайний день" },
-    { date: "2026-10-07", mood: 5, note: "Чудовий настрій" },
-    { date: "2026-10-08", mood: 4, note: "Все пройшло непогано" },
-    { date: "2026-10-09", mood: 2, note: "Був складний день" },
-    { date: "2026-10-10", mood: 5, note: "Приємний день" },
-    { date: "2026-10-11", mood: 1, note: "Жахливий день" }
-];
-
-// API для практичної роботи №9:
-// https://jsonplaceholder.typicode.com/
+// Практична №9: тестовий API для отримання коментарів.
 const API_URL =
     "https://jsonplaceholder.typicode.com/comments?postId=1";
 
-// Перетворює рівень настрою на текст.
-const moodToLabel = (mood) => {
-    switch (mood) 
-    {
-        case 1:
-            return "Дуже сумний";
-        case 2:
-            return "Сумний";
-        case 3:
-            return "Нейтральний";
-        case 4:
-            return "Задовільний";
-        case 5:
-            return "Щасливий";
-        default:
-            return "Невідомий";
-    }
+// Практична №10: компонент MoodEntry отримує дані через props.
+// Emoji та текстовий підпис обчислюються,
+// а не зберігаються в масиві записів.
+
+const MoodEntry = {
+    props: {
+        date: {
+            type: String,
+            required: true
+        },
+
+        mood: {
+            type: Number,
+            required: true
+        },
+
+        note: {
+            type: String,
+            default: ""
+        }
+    },
+
+    computed: {
+        moodEmoji() {
+            const emoji = {
+                1: "😢",
+                2: "😔",
+                3: "😐",
+                4: "🙂",
+                5: "😄"
+            };
+
+            return emoji[this.mood] || "❔";
+        },
+
+        moodLabel() {
+            const labels = {
+                1: "Дуже сумний",
+                2: "Сумний",
+                3: "Нейтральний",
+                4: "Задовільний",
+                5: "Щасливий"
+            };
+
+            return labels[this.mood] || "Невідомий";
+        }
+    },
+
+    template: `
+        <article
+            class="mood-card"
+            :class="[
+                'mood-card-' + mood,
+                mood >= 4 ? 'good' : 'hard'
+            ]"
+            :data-mood="mood"
+        >
+            <h3>
+                Дата: {{ date }}
+                <span
+                    class="mood-emoji"
+                    :aria-label="moodLabel"
+                >
+                    {{ moodEmoji }}
+                </span>
+            </h3>
+
+            <p>
+                Настрій: {{ moodLabel }}. {{ note }}
+            </p>
+        </article>
+    `
 };
 
-// Обчислює суму рівнів настрою.
-function calculateMoodSum(records) 
-{
-    let sum = 0;
+// Практична №10: створення застосунку Vue.
+// Реактивний стан замінює ручне оновлення DOM.
 
-    for (const record of records) 
-    {
-        sum += record.mood;
-    }
+const app = Vue.createApp({
+    components: {
+        MoodEntry
+    },
 
-    return sum;
-}
+    data() {
+        return {
+            moodRecords: [
+                {
+                    id: 1,
+                    date: "2026-10-05",
+                    mood: 5,
+                    note: "Хороший день"
+                },
+                {
+                    id: 2,
+                    date: "2026-10-06",
+                    mood: 3,
+                    note: "Звичайний день"
+                },
+                {
+                    id: 3,
+                    date: "2026-10-07",
+                    mood: 5,
+                    note: "Чудовий настрій"
+                },
+                {
+                    id: 4,
+                    date: "2026-10-08",
+                    mood: 4,
+                    note: "Все пройшло непогано"
+                },
+                {
+                    id: 5,
+                    date: "2026-10-09",
+                    mood: 2,
+                    note: "Був складний день"
+                },
+                {
+                    id: 6,
+                    date: "2026-10-10",
+                    mood: 5,
+                    note: "Приємний день"
+                },
+                {
+                    id: 7,
+                    date: "2026-10-11",
+                    mood: 1,
+                    note: "Жахливий день"
+                }
+            ],
 
-// Обчислює середній рівень настрою.
-function calculateAverageMood(records) 
-{
-    if (records.length === 0) 
-    {
-        return 0;
-    }
+            nextId: 8,
 
-    const sum = calculateMoodSum(records);
+            newDate: "",
+            newMood: "",
+            newNote: "",
 
-    return sum / records.length;
-}
+            apiRecords: [],
+            isLoading: false,
+            errorMessage: ""
+        };
+    },
 
-const moodHistory = document.querySelector("#mood-history");
-const avgMood = document.querySelector("#avg-mood");
+    computed: {
+        // Середній настрій перераховується автоматично
+        // після зміни масиву moodRecords.
 
-// Створює картки на основі масиву записів.
-// Функція використовується для локальних записів і API.
-function renderMoodHistory(records, container, fromApi = false) {
-    container.innerHTML = "";
-
-    for (const record of records) 
-    {
-        const card = document.createElement("article");
-        const title = document.createElement("h3");
-        const description = document.createElement("p");
-
-        card.classList.add("mood-card");
-
-        if (fromApi) 
-        {
-            title.textContent = record.name;
-            description.textContent = record.body;
-
-            const email = document.createElement("p");
-            email.textContent = "Email: " + record.email;
-
-            card.classList.add("api-card");
-            card.append(title, description, email);
-        } 
-        else 
-        {
-            title.textContent = "Дата: " + record.date;
-
-            const moodLabel = moodToLabel(record.mood);
-
-            description.textContent =
-                "Настрій: " + moodLabel + ". " + record.note;
-
-            card.dataset.mood = record.mood;
-
-            if (record.mood >= 4)
-            {
-                card.classList.add("good");
-            } 
-            else 
-            {
-                card.classList.add("hard");
+        averageMood() {
+            if (this.moodRecords.length === 0) {
+                return 0;
             }
 
-            card.classList.add("mood-card-" + record.mood);
-
-            card.append(title, description);
-        }
-
-        container.append(card);
-    }
-}
-
-// Оновлює середній настрій.
-function updateAverageMood(records) 
-{
-    if (records.length === 0) 
-    {
-        avgMood.textContent = "Записів настрою поки немає.";
-        return;
-    }
-
-    const average = calculateAverageMood(records);
-
-    if (average >= 3.5) 
-    {
-        avgMood.textContent =
-            "Середній настрій: " + average.toFixed(2) +
-            " / 5. Гарний тиждень!";
-    } 
-    else 
-    {
-        avgMood.textContent =
-            "Середній настрій: " + average.toFixed(2) +
-            " / 5. Важкий тиждень.";
-    }
-}
-
-// Відображення локальних записів.
-renderMoodHistory(moodRecords, moodHistory);
-updateAverageMood(moodRecords);
-
-// Практична робота №8: обробка форми.
-
-const form = document.querySelector("#mood-form");
-const dateInput = document.querySelector("#date");
-const moodInput = document.querySelector("#mood");
-const noteInput = document.querySelector("#note");
-const noteCounter = document.querySelector("#note-counter");
-
-// Перевіряє правильність введеного рівня настрою.
-moodInput.addEventListener("input", () => {
-    const mood = Number(moodInput.value);
-
-    if (moodInput.value !== "" &&
-        (!Number.isInteger(mood) || mood < 1 || mood > 5)) {
-        moodInput.setCustomValidity(
-            "Рівень настрою має бути цілим числом від 1 до 5."
-        );
-    } 
-    else 
-    {
-        moodInput.setCustomValidity("");
-    }
-});
-
-// Оновлює лічильник символів примітки.
-noteInput.addEventListener("input", () => {
-    const remaining = 200 - noteInput.value.length;
-
-    noteCounter.textContent =
-        "Залишилося символів: " + remaining;
-});
-
-// Обробляє надсилання форми.
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const date = dateInput.value;
-    const mood = Number(moodInput.value);
-    const note = noteInput.value.trim();
-
-    if (!form.checkValidity()) 
-    {
-        form.reportValidity();
-        return;
-    }
-
-    const newRecord = {
-        date: date,
-        mood: mood,
-        note: note
-    };
-
-    moodRecords.push(newRecord);
-
-    renderMoodHistory(moodRecords, moodHistory);
-    updateAverageMood(moodRecords);
-
-    form.reset();
-
-    noteCounter.textContent = "Залишилося символів: 200";
-});
-
-// Практична робота №9: отримання даних з API.
-
-const apiHistory = document.querySelector("#api-history");
-const refreshButton = document.querySelector("#refresh-button");
-const loadingMessage = document.querySelector("#loading-message");
-const errorMessage = document.querySelector("#error-message");
-
-// Показує або приховує стан завантаження.
-function showLoading(isLoading) {
-    loadingMessage.hidden = !isLoading;
-    refreshButton.disabled = isLoading;
-}
-
-// Відображає повідомлення про помилку.
-function showError(message) {
-    errorMessage.textContent = message;
-    errorMessage.hidden = false;
-}
-
-// Отримує записи з JSONPlaceholder за допомогою Fetch API.
-// API: https://jsonplaceholder.typicode.com/comments?postId=1
-async function loadData() {
-    showLoading(true);
-
-    errorMessage.hidden = true;
-    errorMessage.textContent = "";
-
-    try 
-    {
-        const response = await fetch(API_URL);
-
-        if (!response.ok) 
-        {
-            throw new Error(
-                "Сервер відповів кодом " + response.status
+            const sum = this.moodRecords.reduce(
+                (total, record) => total + record.mood,
+                0
             );
+
+            return sum / this.moodRecords.length;
         }
+    },
 
-        const data = await response.json();
+    methods: {
+        // Практична №8: додавання запису настрою.
+        // Практична №10: Vue оновлює DOM автоматично.
 
-        console.log(data);
+        addMoodRecord() {
+            const mood = Number(this.newMood);
 
-        if (!Array.isArray(data)) 
-        {
-            throw new Error("Некоректний формат даних API");
+            if (
+                !this.newDate ||
+                !Number.isInteger(mood) ||
+                mood < 1 ||
+                mood > 5
+            ) {
+                return;
+            }
+
+            this.moodRecords.push({
+                id: this.nextId++,
+                date: this.newDate,
+                mood: mood,
+                note: this.newNote.trim()
+            });
+
+            this.newDate = "";
+            this.newMood = "";
+            this.newNote = "";
+        },
+
+        // Практична №9: отримання даних через Fetch API.
+        // API: https://jsonplaceholder.typicode.com/comments?postId=1
+
+        async loadData() {
+            this.isLoading = true;
+            this.errorMessage = "";
+
+            try {
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Сервер відповів кодом " + response.status
+                    );
+                }
+
+                const data = await response.json();
+
+                console.log(data);
+
+                if (!Array.isArray(data)) {
+                    throw new Error(
+                        "Некоректний формат даних API"
+                    );
+                }
+
+                this.apiRecords = data;
+            } catch (error) {
+                this.errorMessage =
+                    "Записи тимчасово недоступні";
+
+                console.error(error);
+
+                // Попередні записи залишаються на сторінці.
+            } finally {
+                this.isLoading = false;
+            }
         }
+    },
 
-        renderMoodHistory(data, apiHistory, true);
-    } 
-    catch (error) 
-    {
-        showError("Записи тимчасово недоступні");
-
-        console.error(error);
-    } 
-    finally 
-    {
-        showLoading(false);
+    // Автоматичне завантаження API після монтування Vue.
+    mounted() {
+        this.loadData();
     }
-}
+});
 
-// Повторно завантажує записи після натискання кнопки.
-refreshButton.addEventListener("click", loadData);
-
-// Завантажує записи під час відкриття сторінки.
-loadData();
+// Монтування застосунку до елемента #app.
+app.mount("#app");
