@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -7,6 +8,9 @@
     <title>Трекер настрою</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Практична №10: підключення Vue 3 через CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script src="js/app.js" defer></script>
 </head>
 
@@ -21,17 +25,21 @@
         </nav>
     </header>
 
-    <div class="page-layout">
+    <!-- Практична №10: кореневий елемент Vue -->
+    <div id="app" class="page-layout" v-cloak>
         <main>
             <section id="mood-tracker">
                 <h2>Відмітити настрій</h2>
 
-                <form id="mood-form">
+                <!-- Vue обробляє надсилання форми -->
+                <form id="mood-form" @submit.prevent="addMoodRecord">
+
                     <label for="date">Дата:</label>
                     <input
                         type="date"
                         id="date"
                         name="date"
+                        v-model="newDate"
                         required
                     >
 
@@ -43,6 +51,7 @@
                         min="1"
                         max="5"
                         step="1"
+                        v-model="newMood"
                         required
                     >
 
@@ -52,10 +61,11 @@
                         id="note"
                         name="note"
                         maxlength="200"
+                        v-model="newNote"
                     >
 
                     <p id="note-counter">
-                        Залишилося символів: 200
+                        Залишилося символів: {{ 200 - newNote.length }}
                     </p>
 
                     <button type="submit">Зберегти</button>
@@ -65,41 +75,83 @@
             <section id="history">
                 <h2>Історія записів</h2>
 
-                <div class="cards" id="mood-history"></div>
+                <div class="cards" id="mood-history">
+
+                    <!-- Практична №10: компонент і цикл v-for -->
+                    <mood-entry
+                        v-for="record in moodRecords"
+                        :key="record.id"
+                        :date="record.date"
+                        :mood="record.mood"
+                        :note="record.note"
+                    ></mood-entry>
+
+                </div>
             </section>
 
-            <!-- Практична робота №9: записи із зовнішнього API -->
             <section id="api-records">
                 <h2>Записи настрою з API</h2>
 
-                <button type="button" id="refresh-button">
+                <button
+                    type="button"
+                    id="refresh-button"
+                    @click="loadData"
+                    :disabled="isLoading"
+                >
                     Оновити
                 </button>
 
-                <p id="loading-message" role="status" hidden>
+                <p
+                    id="loading-message"
+                    role="status"
+                    v-if="isLoading"
+                >
                     Завантаження...
                 </p>
 
-                <p id="error-message" role="alert" hidden></p>
+                <p
+                    id="error-message"
+                    role="alert"
+                    v-if="errorMessage"
+                >
+                    {{ errorMessage }}
+                </p>
 
-                <div class="cards" id="api-history"></div>
+                <div class="cards" id="api-history">
+
+                    <article
+                        class="mood-card api-card"
+                        v-for="record in apiRecords"
+                        :key="record.id"
+                    >
+                        <h3>{{ record.name }}</h3>
+                        <p>{{ record.body }}</p>
+                        <p>Email: {{ record.email }}</p>
+                    </article>
+
+                </div>
             </section>
         </main>
 
         <aside>
             <h2>Короткий підсумок</h2>
 
-            <p id="avg-mood">
-                Середній настрій: ще не обчислено
+            <p id="avg-mood" v-if="moodRecords.length === 0">
+                Записів настрою поки немає.
+            </p>
+
+            <p id="avg-mood" v-else>
+                Середній настрій:
+                {{ averageMood.toFixed(2) }} / 5.
+                {{ averageMood >= 3.5 ? 'Гарний тиждень!' : 'Важкий тиждень.' }}
             </p>
         </aside>
     </div>
 
     <footer>
         <p>
-            Трекер настрою - Вебзастосунок для
-            відстеження настрою та емоцій користувача.
-            &copy; 2026
+            Трекер настрою — вебзастосунок для відстеження
+            настрою та емоцій користувача. &copy; 2026
         </p>
     </footer>
 </body>
