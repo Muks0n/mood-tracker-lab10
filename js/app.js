@@ -1,3 +1,8 @@
+// Обрано Vue 3, оскільки він підтримує реактивність і 
+// компоненти та легко підключається через CDN без 
+// додаткового налаштування збірки.
+
+
 const moodRecords = [
     { date: "2026-10-05", mood: 5, note: "Хороший день" },
     { date: "2026-10-06", mood: 3, note: "Звичайний день" },
@@ -15,7 +20,8 @@ const API_URL =
 
 // Перетворює рівень настрою на текст.
 const moodToLabel = (mood) => {
-    switch (mood) {
+    switch (mood) 
+    {
         case 1:
             return "Дуже сумний";
         case 2:
@@ -32,10 +38,12 @@ const moodToLabel = (mood) => {
 };
 
 // Обчислює суму рівнів настрою.
-function calculateMoodSum(records) {
+function calculateMoodSum(records) 
+{
     let sum = 0;
 
-    for (const record of records) {
+    for (const record of records) 
+    {
         sum += record.mood;
     }
 
@@ -43,8 +51,10 @@ function calculateMoodSum(records) {
 }
 
 // Обчислює середній рівень настрою.
-function calculateAverageMood(records) {
-    if (records.length === 0) {
+function calculateAverageMood(records) 
+{
+    if (records.length === 0) 
+    {
         return 0;
     }
 
@@ -61,14 +71,16 @@ const avgMood = document.querySelector("#avg-mood");
 function renderMoodHistory(records, container, fromApi = false) {
     container.innerHTML = "";
 
-    for (const record of records) {
+    for (const record of records) 
+    {
         const card = document.createElement("article");
         const title = document.createElement("h3");
         const description = document.createElement("p");
 
         card.classList.add("mood-card");
 
-        if (fromApi) {
+        if (fromApi) 
+        {
             title.textContent = record.name;
             description.textContent = record.body;
 
@@ -77,7 +89,9 @@ function renderMoodHistory(records, container, fromApi = false) {
 
             card.classList.add("api-card");
             card.append(title, description, email);
-        } else {
+        } 
+        else 
+        {
             title.textContent = "Дата: " + record.date;
 
             const moodLabel = moodToLabel(record.mood);
@@ -87,9 +101,12 @@ function renderMoodHistory(records, container, fromApi = false) {
 
             card.dataset.mood = record.mood;
 
-            if (record.mood >= 4) {
+            if (record.mood >= 4)
+            {
                 card.classList.add("good");
-            } else {
+            } 
+            else 
+            {
                 card.classList.add("hard");
             }
 
@@ -103,19 +120,24 @@ function renderMoodHistory(records, container, fromApi = false) {
 }
 
 // Оновлює середній настрій.
-function updateAverageMood(records) {
-    if (records.length === 0) {
+function updateAverageMood(records) 
+{
+    if (records.length === 0) 
+    {
         avgMood.textContent = "Записів настрою поки немає.";
         return;
     }
 
     const average = calculateAverageMood(records);
 
-    if (average >= 3.5) {
+    if (average >= 3.5) 
+    {
         avgMood.textContent =
             "Середній настрій: " + average.toFixed(2) +
             " / 5. Гарний тиждень!";
-    } else {
+    } 
+    else 
+    {
         avgMood.textContent =
             "Середній настрій: " + average.toFixed(2) +
             " / 5. Важкий тиждень.";
@@ -143,7 +165,9 @@ moodInput.addEventListener("input", () => {
         moodInput.setCustomValidity(
             "Рівень настрою має бути цілим числом від 1 до 5."
         );
-    } else {
+    } 
+    else 
+    {
         moodInput.setCustomValidity("");
     }
 });
@@ -164,7 +188,8 @@ form.addEventListener("submit", (event) => {
     const mood = Number(moodInput.value);
     const note = noteInput.value.trim();
 
-    if (!form.checkValidity()) {
+    if (!form.checkValidity()) 
+    {
         form.reportValidity();
         return;
     }
@@ -212,10 +237,12 @@ async function loadData() {
     errorMessage.hidden = true;
     errorMessage.textContent = "";
 
-    try {
+    try 
+    {
         const response = await fetch(API_URL);
 
-        if (!response.ok) {
+        if (!response.ok) 
+        {
             throw new Error(
                 "Сервер відповів кодом " + response.status
             );
@@ -225,16 +252,21 @@ async function loadData() {
 
         console.log(data);
 
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(data)) 
+        {
             throw new Error("Некоректний формат даних API");
         }
 
         renderMoodHistory(data, apiHistory, true);
-    } catch (error) {
+    } 
+    catch (error) 
+    {
         showError("Записи тимчасово недоступні");
 
         console.error(error);
-    } finally {
+    } 
+    finally 
+    {
         showLoading(false);
     }
 }
