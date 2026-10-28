@@ -12,7 +12,8 @@ const API_URL =
 // а не зберігаються в масиві записів.
 
 const MoodEntry = {
-    props: {
+    props: 
+    {
         date: {
             type: String,
             required: true
@@ -29,7 +30,8 @@ const MoodEntry = {
         }
     },
 
-    computed: {
+    computed: 
+    {
         moodEmoji() {
             const emoji = {
                 1: "😢",
@@ -42,7 +44,8 @@ const MoodEntry = {
             return emoji[this.mood] || "❔";
         },
 
-        moodLabel() {
+        moodLabel() 
+        {
             const labels = {
                 1: "Дуже сумний",
                 2: "Сумний",
@@ -89,7 +92,8 @@ const app = Vue.createApp({
         MoodEntry
     },
 
-    data() {
+    data() 
+    {
         return {
             moodRecords: [
                 {
@@ -148,7 +152,8 @@ const app = Vue.createApp({
         };
     },
 
-    computed: {
+    computed: 
+    {
         // Середній настрій перераховується автоматично
         // після зміни масиву moodRecords.
 
@@ -166,11 +171,13 @@ const app = Vue.createApp({
         }
     },
 
-    methods: {
+    methods: 
+    {
         // Практична №8: додавання запису настрою.
         // Практична №10: Vue оновлює DOM автоматично.
 
-        addMoodRecord() {
+        addMoodRecord() 
+        {
             const mood = Number(this.newMood);
 
             if (
@@ -178,7 +185,8 @@ const app = Vue.createApp({
                 !Number.isInteger(mood) ||
                 mood < 1 ||
                 mood > 5
-            ) {
+            ) 
+            {
                 return;
             }
 
@@ -201,10 +209,12 @@ const app = Vue.createApp({
             this.isLoading = true;
             this.errorMessage = "";
 
-            try {
+            try 
+            {
                 const response = await fetch(API_URL);
 
-                if (!response.ok) {
+                if (!response.ok) 
+                {
                     throw new Error(
                         "Сервер відповів кодом " + response.status
                     );
@@ -214,28 +224,34 @@ const app = Vue.createApp({
 
                 console.log(data);
 
-                if (!Array.isArray(data)) {
+                if (!Array.isArray(data)) 
+                {
                     throw new Error(
                         "Некоректний формат даних API"
                     );
                 }
 
                 this.apiRecords = data;
-            } catch (error) {
+            } 
+            catch (error) 
+            {
                 this.errorMessage =
                     "Записи тимчасово недоступні";
 
                 console.error(error);
 
                 // Попередні записи залишаються на сторінці.
-            } finally {
+            } 
+            finally 
+            {
                 this.isLoading = false;
             }
         }
     },
 
     // Автоматичне завантаження API після монтування Vue.
-    mounted() {
+    mounted() 
+    {
         this.loadData();
     }
 });
