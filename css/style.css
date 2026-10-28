@@ -377,6 +377,28 @@ form input:invalid:not(:placeholder-shown)
     overflow-wrap: anywhere;
 }
 
+/* Практична робота №10: Vue 3 */
+
+/* Оформлення emoji, який обчислюється компонентом MoodEntry */
+
+.mood-emoji
+{
+    display: inline-block;
+
+    margin-left: 6px;
+
+    font-size: 1.4rem;
+
+    vertical-align: middle;
+}
+
+/* Приховування Vue-шаблону до монтування застосунку */
+
+[v-cloak]
+{
+    display: none !important;
+}
+
 /* Адаптація для планшетів */
 
 @media (min-width: 600px)
